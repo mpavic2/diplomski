@@ -46,70 +46,25 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                     }}
                 >
                     <div className="container">
-                        <div className="site-mast">
-                            <div className="site-mast-left">
-                                <Link to="/">
-                                    {site.logo ? (
-                                        <img
-                                            className="site-logo"
-                                            src={site.logo}
-                                            alt={site.title}
-                                        />
-                                    ) : (
-                                        <GatsbyImage image={data.file.childImageSharp.gatsbyImageData} alt={site.title} />
-                                    )}
-                                </Link>
-                            </div>
-                            <div className="site-mast-right">
-                                {site.twitter && (
-                                    <a
-                                        href={twitterUrl}
-                                        className="site-nav-item"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        <img
-                                            className="site-nav-icon"
-                                            src="/images/icons/twitter.svg"
-                                            alt="Twitter"
-                                        />
-                                    </a>
-                                )}
-                                {site.facebook && (
-                                    <a
-                                        href={facebookUrl}
-                                        className="site-nav-item"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        <img
-                                            className="site-nav-icon"
-                                            src="/images/icons/facebook.svg"
-                                            alt="Facebook"
-                                        />
-                                    </a>
-                                )}
-                                <a
-                                    className="site-nav-item"
-                                    href={`https://feedly.com/i/subscription/feed/${config.siteUrl}/rss/`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    <img
-                                        className="site-nav-icon"
-                                        src="/images/icons/rss.svg"
-                                        alt="RSS Feed"
-                                    />
-                                </a>
-                            </div>
-                        </div>
+                    <div className="site-mast">
+    <div className="site-mast-left">
+        
+        {}
+        <Link to="/posts" className="site-nav-item">
+            <button className="show-posts-button">Objave</button>
+        </Link>
+    </div>
+    
+</div>
+
+
                         {isHome ? (
                             <div className="site-banner">
                                 <h1 className="site-banner-title">
-                                    {site.title}
+                                    Diplomski rad
                                 </h1>
                                 <p className="site-banner-desc">
-                                    {site.description}
+                                    Implementacija Gatsby i Ghost CMS tehnologije pri izradi mrežnog mjesta
                                 </p>
                             </div>
                         ) : null}
@@ -126,7 +81,7 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                                     className="site-nav-button"
                                     to="/about"
                                 >
-                                    About
+                                    O stranici
                                 </Link>
                             </div>
                         </nav>

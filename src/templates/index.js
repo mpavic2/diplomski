@@ -1,20 +1,79 @@
 import * as React from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import { graphql } from "gatsby";
 
 import { Layout, PostCard, Pagination } from "../components/common";
 import { MetaData } from "../components/common/meta";
 
-/**
- * Main index page (home page)
- *
- * Loads all posts from Ghost and uses pagination to navigate through them.
- * The number of posts that should appear per page can be setup
- * in /utils/siteConfig.js under `postsPerPage`.
- *
- */
 const Index = ({ data, location, pageContext }) => {
-    const posts = data.allGhostPost.edges;
+    const initialPosts = data.allGhostPost.edges;
+    const [posts, setPosts] = useState(initialPosts); 
+
+    // Funkcija za brisanje objave
+    const handleDeletePost = async (postId) => {
+        const apiUrl = `http://localhost:2368/ghost/api/admin/posts/${postId}/`;
+        const apiKey = `66f2725397bcb54204450e4d:ff5ba5fbf412c5e51501c1d563cb6a62dc0e4b7703b0b089b9b28c77c664438f`;
+
+        try {
+            const response = await fetch(apiUrl, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Ghost ${apiKey}`,
+                },
+            });
+
+            if (response.ok) {
+                setPosts((prevPosts) =>
+                    prevPosts.filter(({ node }) => node.id !== postId)
+                );
+                alert("Objava je uspješno obrisana!");
+            } else {
+                alert("Uspješno brisanje objave");
+            }
+        } catch (error) {
+            console.error("Greška prilikom brisanja objave:", error);
+        }
+    };
+
+    const handleUpdatePost = async (postId, updatedData) => {
+        const apiUrl = `http://localhost:2368/ghost/api/v4/admin/posts/${postId}/`;
+        const apiKey = `66f2725397bcb54204450e4d:ff5ba5fbf412c5e51501c1d563cb6a62dc0e4b7703b0b089b9b28c77c664438f`;
+    
+        try {
+            const response = await fetch(apiUrl, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Ghost ${apiKey}`,
+                },
+                body: JSON.stringify({
+                    body: JSON.stringify({ posts: [updatedData] }), 
+                }),
+            });
+    
+            if (response.ok) {
+                const responseData = await response.json();
+                console.log("API Response:", responseData);
+    
+                alert("Objava uspješno ažurirana!");
+    
+                setPosts((prevPosts) =>
+                    prevPosts.map(({ node }) =>
+                        node.id === postId ? { node: { ...node, ...updatedData } } : { node }
+                    )
+                );
+            } else {
+                const errorData = await response.json();
+                console.error("API Error Response:", errorData);
+                alert("Neuspješno ažuriranje objave.");
+            }
+        } catch (error) {
+            console.error("Greška prilikom ažuriranja objave:", error);
+        }
+    };
+    
 
     return (
         <>
@@ -23,8 +82,12 @@ const Index = ({ data, location, pageContext }) => {
                 <div className="container">
                     <section className="post-feed">
                         {posts.map(({ node }) => (
-                            // The tag below includes the markup for each post - components/common/PostCard.js
-                            <PostCard key={node.id} post={node} />
+                            <PostCard
+                                key={node.id}
+                                post={node}
+                                handleDeletePost={handleDeletePost}
+                                handleUpdatePost={handleUpdatePost}  
+                            />
                         ))}
                     </section>
                     <Pagination pageContext={pageContext} />
@@ -46,8 +109,7 @@ Index.propTypes = {
 
 export default Index;
 
-// This page query loads all posts sorted descending by published date
-// The `limit` and `skip` values are used for pagination
+
 export const pageQuery = graphql`
     query GhostPostQuery($limit: Int!, $skip: Int!) {
         allGhostPost(

@@ -647,6 +647,48 @@ h6 {
     font-weight: 700;
 }
 
+.post-edit-form {
+    display: flex;
+    flex-direction: column; /* Postavlja elemente jedan ispod drugog */
+    padding: 16px; /* Unutarnje margine */
+    background-color: #f9f9f9; /* Svijetla pozadina */
+    border: 1px solid #ccc; /* Obrub */
+    border-radius: 8px; /* Zaobljeni rubovi */
+    margin-top: 16px; /* Razmak od gornjih elemenata */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Lagana sjena */
+}
+
+.post-edit-form input,
+.post-edit-form textarea {
+    margin-bottom: 12px; /* Razmak između elemenata */
+    padding: 10px; /* Unutarnje margine */
+    border: 1px solid #ccc; /* Obrub */
+    border-radius: 4px; /* Zaobljeni rubovi */
+    font-size: 16px; /* Veličina fonta */
+}
+
+.post-edit-form input:focus,
+.post-edit-form textarea:focus {
+    border-color: #007bff; /* Plavi obrub kada je fokusirano */
+    outline: none; /* Uklanjanje zadane oznake fokusa */
+}
+
+.post-edit-form button {
+    padding: 10px 15px; /* Unutarnje margine za gumb */
+    background-color: #007bff; /* Plava pozadina */
+    color: white; /* Bijela boja teksta */
+    border: none; /* Bez obruba */
+    border-radius: 4px; /* Zaobljeni rubovi */
+    cursor: pointer; /* Promijeni pokazivač na ruku */
+    font-size: 16px; /* Veličina fonta */
+    transition: background-color 0.3s; /* Animacija promjene boje pozadine */
+}
+
+.post-edit-form button:hover {
+    background-color: #0056b3; /* Tamnija plava kada je miša iznad */
+}
+
+
 .content-body pre {
     margin: 0.4em 0 1.8em;
     font-size: 1.6rem;
@@ -657,6 +699,73 @@ h6 {
     color: #fff;
     border-radius: 12px;
 }
+
+
+
+.delete-post-button:hover {
+    background-color: darkred; 
+    opacity: 0.8;
+} 
+.delete-post-button,
+.update-post-button {
+    background-color: grey; /* Prilagodi boju */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.update-post-button:hover {
+    background-color: #09192a; 
+    opacity: 0.8;
+}
+
+.post-card-buttons {
+    display: flex;
+    justify-content: space-between; 
+    margin-top: 10px; 
+
+}
+
+.show-posts-button {
+    padding: 10px 15px; 
+    font-size: 14px; 
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background-color: lightgrey; 
+    color: black;
+    margin-left: 10px; 
+}
+
+.show-posts-button:hover {
+    background-color: darkgray; 
+}
+
+.site-mast-left {
+    display: flex;
+    align-items: center; 
+}
+
+.show-posts-button {
+    margin-left: 15px; 
+}
+
+
+.post-feed {
+    display: block; 
+    margin: 0 auto; 
+    padding: 2rem 0; 
+}
+
+.post-card {
+    display: block;
+    margin-bottom: 2rem;
+    width: 100%; 
+}
+
+
 
 /* Header
 /* ---------------------------------------------------------- */
@@ -766,10 +875,9 @@ h6 {
 /* ---------------------------------------------------------- */
 
 .post-feed {
-    display: grid;
-    justify-content: space-between;
-    grid-gap: 30px;
-    grid-template-columns: 1fr 1fr 1fr;
+    display: block; 
+    margin: 0 auto;
+    padding: 2rem 0;
 }
 
 @media (max-width: 980px) {
@@ -784,8 +892,9 @@ h6 {
 }
 
 .post-card {
-    color: inherit;
-    text-decoration: none;
+    display: block; 
+    margin-bottom: 2rem;
+    width: 100%; 
 }
 
 .post-card:hover {
