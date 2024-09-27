@@ -2,6 +2,8 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import { Link } from "gatsby";
 
+
+
 /**
  * Navigation component
  *
@@ -15,6 +17,8 @@ import { Link } from "gatsby";
 const Navigation = ({ data, navClass }) => (
     <>
         {data.map((navItem, i) => {
+            
+            
             if (navItem.url.match(/^\s?http(s?)/gi)) {
                 return (
                     <a

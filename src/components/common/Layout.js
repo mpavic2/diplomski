@@ -51,7 +51,7 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
         
         {}
         <Link to="/posts" className="site-nav-item">
-            <button className="show-posts-button">Objave</button>
+            <button className="show-posts-button">Aktivnosti</button>
         </Link>
     </div>
     
@@ -61,20 +61,21 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                         {isHome ? (
                             <div className="site-banner">
                                 <h1 className="site-banner-title">
-                                    Diplomski rad
+                                    Sportfest
                                 </h1>
                                 <p className="site-banner-desc">
-                                    Implementacija Gatsby i Ghost CMS tehnologije pri izradi mrežnog mjesta
-                                </p>
+                                Dinamična aplikacija koja omogućuje korisnicima da lako otkriju, prate i sudjeluju u sportskim događanjima u njihovoj blizini.                                </p>
                             </div>
                         ) : null}
                         <nav className="site-nav">
                             <div className="site-nav-left">
                                 {/* The navigation items as setup in Ghost */}
-                                <Navigation
-                                    data={site.navigation}
-                                    navClass="site-nav-item"
-                                />
+                                <Link
+                                    className="site-nav-button"
+                                    to="/"
+                                >
+                                    Početna
+                                </Link>
                             </div>
                             <div className="site-nav-right">
                                 <Link
@@ -111,6 +112,7 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                             </a>
                         </div>
                         <div className="site-foot-nav-right">
+                            <h1>Početna</h1>
                             <Navigation
                                 data={site.navigation}
                                 navClass="site-foot-nav-item"

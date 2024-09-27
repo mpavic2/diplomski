@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import { Link } from "gatsby";
 import { Tags } from "@tryghost/helpers-gatsby";
 import { readingTime as readingTimeHelper } from "@tryghost/helpers";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'; // Import Quill styles
 
 const PostCard = ({ post, handleDeletePost, handleUpdatePost }) => {
     const [isDeleted, setIsDeleted] = useState(false);
@@ -27,12 +29,11 @@ const PostCard = ({ post, handleDeletePost, handleUpdatePost }) => {
             title: updatedTitle,
             excerpt: updatedExcerpt,
         };
-    
+
         await handleUpdatePost(post.id, updatedData); 
         setIsUpdated(true);
         setEditMode(false);
     };
-    
 
     if (isDeleted) {
         return <div>Objava izbrisana</div>;
@@ -97,10 +98,10 @@ const PostCard = ({ post, handleDeletePost, handleUpdatePost }) => {
                         onChange={(e) => setUpdatedTitle(e.target.value)}
                         placeholder="Novi naslov"
                     />
-                    <textarea
+                    <ReactQuill 
                         value={updatedExcerpt}
-                        onChange={(e) => setUpdatedExcerpt(e.target.value)}
-                        placeholder="Novi sažetak"
+                        onChange={setUpdatedExcerpt} // Update excerpt on change
+                        placeholder="Sadržaj"
                     />
                     <button onClick={onUpdatePost}>Spremi promjene</button>
                 </div>
@@ -116,7 +117,7 @@ const PostCard = ({ post, handleDeletePost, handleUpdatePost }) => {
                         className="update-post-button"
                         onClick={() => setEditMode(true)} // Activate edit mode
                     >
-                        Ažuriraj
+                        Uredi
                     </button>
                 </div>
             )}

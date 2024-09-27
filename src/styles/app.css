@@ -443,7 +443,7 @@ blockquote cite a {
 }
 
 a {
-    color: #26a8ed;
+   color: #505050; 
     text-decoration: none;
 }
 
@@ -527,7 +527,7 @@ h6 {
 .container {
     max-width: 1120px;
     margin: 0 auto;
-    padding: 0 4vw;
+    padding: 0 0vw;
 }
 
 .content {
@@ -737,6 +737,7 @@ h6 {
     background-color: lightgrey; 
     color: black;
     margin-left: 10px; 
+
 }
 
 .show-posts-button:hover {
@@ -776,7 +777,7 @@ h6 {
     color: #fff;
     background: var(--color-base);
     background-position: center;
-    background-size: cover;
+    
 }
 
 .site-nav-item {
@@ -851,11 +852,11 @@ h6 {
 
 .site-nav-button {
     display: inline-block;
-    padding: 5px 10px;
+    padding: 6px 10px;
     border: #fff 1px solid;
     color: #fff;
-    font-size: 1.3rem;
-    line-height: 1em;
+    font-size: 1.8rem;
+    line-height: 1.2em;
     border-radius: var(--radius);
     opacity: 0.7;
 }
@@ -868,7 +869,9 @@ h6 {
 /* ---------------------------------------------------------- */
 
 .site-main {
-    padding: 4vw 0;
+    padding: 2vw 0;
+    background: fixed;
+    background-color: white;
 }
 
 /* Index
